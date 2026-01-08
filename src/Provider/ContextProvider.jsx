@@ -3,6 +3,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -26,6 +27,10 @@ const ContextProvider = ({ children }) => {
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+  const forgotPassword = (email) => {
+    setLoading(true);
+    return sendPasswordResetEmail(auth, email);
   };
 
   const signInWithGoogle = () => {
@@ -60,6 +65,7 @@ const ContextProvider = ({ children }) => {
   const authInfo = {
     user,
     setUser,
+    forgotPassword,
     loading,
     setLoading,
     createUser,
@@ -70,7 +76,7 @@ const ContextProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext value={authInfo}>{children}</AuthContext>
   );
 };
 
