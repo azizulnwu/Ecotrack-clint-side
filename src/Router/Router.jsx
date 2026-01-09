@@ -5,6 +5,8 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/register";
 import AddChallenges from "../Components/AdminComponent/AddChallenges";
 import ForgotPassword from "../Pages/ForgetPassword/ForgotPassword";
+import CardDetails from "../Components/CardSection/CardDetails";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +34,13 @@ export const router = createBrowserRouter([
   {
     path:"/forgotPassword",
     element:<ForgotPassword></ForgotPassword>
+  },
+  {
+    path:"/cardDetails/:id",
+    element:<CardDetails></CardDetails>
+  },{
+    path:"*",
+    Component:ErrorPage,
   }
 
 ]);

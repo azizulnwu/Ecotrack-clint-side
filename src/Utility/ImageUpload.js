@@ -12,7 +12,7 @@ const ImageUpload = async (imageFile) => {
   );
  console.log(data?.data?.
 display_url)
-  return data?.data?.
+return data?.data?.
 display_url;
 };
 

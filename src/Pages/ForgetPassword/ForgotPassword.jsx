@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import BrandLogo from "../../Components/Shared/BrandLogo";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -8,7 +8,8 @@ import useAuth from "../../Hook/useAuth";
 import LoadingSpinner from "../../Components/Shared/LoadingSpinner";
 
 const ForgotPassword = () => {
-  const { forgotPassword, loading } = useAuth();
+  const {loading} = useAuth();
+  const navigate = useNavigate()
 
   // if(loading)return <Loading></Loading>
 
@@ -19,18 +20,18 @@ const ForgotPassword = () => {
   } = useForm();
 
   const handleForgotPassword =async (data) => {
-    const { email } = data;
-    await forgotPassword(email)
-    .then(() => {
-   
-  })
-  .catch((error) => {
-   
+    console.log(data)
+    alert("Pls. check your Email")
+    navigate("/")
+    // const { email } = data;
+  //   await forgotPassword(email)
+  //   .then(() => {
+  //  })
+  // .catch((error) => {
+  //  const errorMessage = error.message;
+  //   console.log(errorMessage )
     
-    const errorMessage = error.message;
-    console.log(errorMessage )
-    // ..
-  });
+  // });
   };
 
   return (

@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import BrandLogo from "../Shared/BrandLogo";
+import ImageUpload from "../../Utility/ImageUpload";
 
 const AddChallenges = () => {
   // const navigate = useNavigate();
@@ -17,9 +18,10 @@ const AddChallenges = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const {
       name,
       image,
@@ -31,16 +33,55 @@ const AddChallenges = () => {
       startDate,
       endDate,
       category,
+      description,
     } = data;
     const imageFile = image[0];
-    console.log(data);
 
     try {
-      console.log(name);
+      const challengesInfo = {
+        name,
+        title,
+        email,
+        target,
+        duration,
+        impactMetric,
+        startDate,
+        endDate,
+        category,
+        description
+      };
+
+      axiosInstance.post("/challenges", challengesInfo).then((res) => {
+        if (res.data.insertedId) {
+          console.log({ message: "Challenges Upload Successful" });
+        }
+        ImageUpload(imageFile).then((data) => {
+          const image = data;
+          const challengesInfo = {
+            category,
+            image,
+          };
+
+          axiosInstance.patch("/challenges/image", challengesInfo).then(() => {
+            if (res.data.insertedId) {
+              console.log({ message: "Challenges Upload Successful" });
+            }
+          });
+        });
+
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Challenges Upload Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
     }
+    reset();
   };
 
   return (
@@ -49,7 +90,7 @@ const AddChallenges = () => {
         <BrandLogo></BrandLogo>
       </Link>
 
-      <div className="hero bg-base-200 min-h-screen p-4">
+      <div className="hero bg-base-200 min-h-screen p-4 mt-2">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -59,7 +100,7 @@ const AddChallenges = () => {
                 <input
                   type="text"
                   className="input w-full"
-                  placeholder="Name"
+                  placeholder="Title"
                   {...register("title", {
                     required: true,
                     maxLength: {
@@ -83,11 +124,12 @@ const AddChallenges = () => {
                       required: true,
                     })}
                   >
-                    <option disabled={true}>Waste Reduction</option>
+                    <option>Waste Reduction</option>
                     <option>Energy Conservation</option>
                     <option>Water Conservation</option>
                     <option>Sustainable Transport</option>
                     <option>Green Living</option>
+                    <option>Sustainable Agriculture</option>
                   </select>
                 </fieldset>
 
@@ -136,7 +178,7 @@ const AddChallenges = () => {
                   {...register("target", {
                     required: true,
                     maxLength: {
-                      value: 20,
+                      value: 100,
                       message: "target must be at least 5 characters",
                     },
                   })}
