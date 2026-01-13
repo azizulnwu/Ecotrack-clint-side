@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Logo from "../../assets/Logo";
 import { Link } from "react-router";
 import useAuth from "../../Hook/useAuth";
 import { toast, ToastContainer } from "react-toastify";
+import useAxios from "../../Hook/useAxios";
 
 const Navbar = () => {
-  const {user, logOut} = useAuth()
-  const LogoutUser =()=>{
-    logOut()
-    .then(()=>
-      toast.success("Logout successfully")
-    )
-      }
-  
+  const { user, logOut } = useAuth();
+  const axiosInstance = useAxios();
+  const [currentUser, setCurrentUser] = useState();
+  const LogoutUser = () => {
+    logOut().then(() => toast.success("Logout successfully"));
+  };
+
+  useEffect(() => {
+    if (!user?.email) return;
+    axiosInstance.get(`/user?email=${user?.email}`).then((res) => {
+      setCurrentUser(res.data);
+    });
+  }, [user?.email, axiosInstance]);
+
   return (
     <div className="max-w-[80%] mx-auto">
       <div className="navbar bg-base-100 ">
@@ -43,7 +50,6 @@ const Navbar = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              
 
               <li>
                 <Link>My Activities</Link>
@@ -69,17 +75,16 @@ const Navbar = () => {
             <li>
               <a>Home</a>
             </li>
-            
 
             <li>
-              <a>My Activities</a>
+              <Link to="/myActivities">My Activities</Link>
             </li>
             <li>
-                <Link>Challenges</Link>
-              </li>
-              <li>
-                <Link to="/addChallenges">Add Challenges</Link>
-              </li>
+              <Link>Challenges</Link>
+            </li>
+            <li>
+              <Link to="/addChallenges">Add Challenges</Link>
+            </li>
           </ul>
         </div>
         <div className="navbar-end">
@@ -87,21 +92,25 @@ const Navbar = () => {
             <div className="dropdown">
               <div tabIndex={0} role="button" className="btn m-1">
                 <img
-                  src="https://i.ibb.co/gbYs5Gjh/eco-friendly.png"
+                  src={
+                    currentUser?.photoUrl
+                      ? currentUser?.photoUrl
+                      : `https://i.ibb.co.com/GQqk9w6N/e035717e-a755-485a-86c7-c165a4f7bb80.jpg`
+                  }
                   alt="logo"
                   className="w-6 h-6"
                 />
-                <span>EcoTruck</span>
+                <span>{currentUser?.displayName}</span>
               </div>
               <ul
                 tabIndex="-1"
                 className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
               >
                 <li>
-                  <a>Profile</a>
+                  <Link to="/myProfile">Profile</Link>
                 </li>
                 <li>
-                  <a>My Activities</a>
+                  <Link to="/myActivities">My Activities</Link>
                 </li>
                 <li>
                   <button onClick={LogoutUser}>Logout</button>

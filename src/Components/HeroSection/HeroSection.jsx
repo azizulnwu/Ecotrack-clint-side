@@ -17,7 +17,6 @@ const HeroSection = () => {
     queryKey: ["challengeData"],
     queryFn: async () => {
       const result = await axiosInstance.get("/challengeData");
-
       return result.data;
     },
   });
@@ -45,12 +44,13 @@ const HeroSection = () => {
         onClickThumb={onClickThumb}
       >
         {challengeData.map((data) => {
-          refetch()
+          refetch();
           return (
             <div className="py-4">
               <img src={data.image} className="w-60 h-100" />
               <p className="legend font-bold text-2xl">
-                Title : {data.title}<span className="ml-2">Category : {data.category}</span>
+                Title : {data.title}
+                <span className="ml-2">Category : {data.category}</span>
               </p>
             </div>
           );

@@ -2,20 +2,18 @@ import React from "react";
 import useAxios from "../../Hook/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../Shared/LoadingSpinner";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const AllCards = () => {
   const axiosInstance = useAxios();
   const {
     data: AllCards = [],
-    error,
-    isLoading,
-    refetch,
-  } = useQuery({
+   isLoading,
+   } = useQuery({
     queryKey: ["AllCards"],
     queryFn: async () => {
       const result = await axiosInstance.get("/challengeData");
-
+      console.log(result.data)
       return result.data;
     },
   });
@@ -26,7 +24,10 @@ const AllCards = () => {
     <div className="max-w-[90%] mx-auto grid grid-cols-3 gap-2 bg-slate-300 p-2 rounded-box">
       {AllCards.map((data) => {
         return (
-          <NavLink to={`/cardDetails/${data._id}`} className="card bg-base-100  shadow-sm flex p-2 ">
+          <NavLink
+            to={`/cardDetails/${data._id}`}
+            className="card bg-base-100  shadow-sm flex p-2 "
+          >
             <figure className="flex-1">
               <img src={data.image} alt="Shoes" />
             </figure>

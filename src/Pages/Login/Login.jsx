@@ -1,15 +1,15 @@
-import React from 'react';
-import BrandLogo from '../../Components/Shared/BrandLogo';
-import { Link, useNavigate } from 'react-router';
-import useAuth from '../../Hook/useAuth';
-import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2';
-import { toast } from 'react-toastify';
-import LoadingSpinner from '../../Components/Shared/LoadingSpinner';
+import React from "react";
+import BrandLogo from "../../Components/Shared/BrandLogo";
+import { Link, useNavigate } from "react-router";
+import useAuth from "../../Hook/useAuth";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../../Components/Shared/LoadingSpinner";
 
 const Login = () => {
-    const navigate = useNavigate();
-  const {signIn,signInWithGoogle,loading } = useAuth();
+  const navigate = useNavigate();
+  const { signIn, signInWithGoogle, loading, setLoading } = useAuth();
 
   // if(loading)return <Loading></Loading>
 
@@ -19,31 +19,10 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onLogin = (data)=> {
-     const {email, password } = data;
-     signIn(email,password)
-     .then(()=>{
-       Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Login Successful",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
-      })
-     .catch ((err)=> {
-           console.log(err);
-           toast.error(err?.message);
-         })
-
-    
-  }
-
-
-
-  const SignInWithGoogle = () => {
-      signInWithGoogle().then(() => {
+  const onLogin = (data) => {
+    const { email, password } = data;
+    signIn(email, password)
+      .then(() => {
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -51,35 +30,53 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+         setLoading(false)
         navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err?.message);
       });
-    };
+  };
 
-
-
-
-
-
+  const SignInWithGoogle = () => {
+    signInWithGoogle().then(() => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+       setLoading(false)
+      navigate("/");
+    });
+  };
 
   return (
-    <div className='max-w-[80%] mx-auto'>
-   
-     <Link to="/"><BrandLogo></BrandLogo></Link>
+    <div className="max-w-[80%] mx-auto">
+      <Link to="/">
+        <BrandLogo></BrandLogo>
+      </Link>
 
       <div className="hero bg-base-200 min-h-screen mt-2">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
           <div className="card-body">
             <form onSubmit={handleSubmit(onLogin)}>
               <fieldset className="fieldset">
-                
-
                 {/* Email field */}
                 <label className="label">Email</label>
                 <input
                   type="email"
                   className="input w-full"
                   placeholder="Email"
-                  {...register("email", { required: true })}
+                  {...register("email", {
+                    required: true,
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Please enter a valid email address",
+                    },
+                  })}
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -107,15 +104,20 @@ const Login = () => {
                   </p>
                 )}
 
-                 <div>
-                  <Link to="/forgotPassword" className="link link-hover mt-2">Forgot password?</Link>
+                <div>
+                  <Link to="/forgotPassword" className="link link-hover mt-2">
+                    Forgot password?
+                  </Link>
                 </div>
                 <button className="btn btn-neutral mt-4 p-2">
-                  {loading ? <LoadingSpinner></LoadingSpinner> : "SUBMIT"}
+                  {loading ? <LoadingSpinner></LoadingSpinner> : "Login"}
                 </button>
               </fieldset>
             </form>
-            <button onClick={SignInWithGoogle} className="btn bg-white text-black border-[#e5e5e5]">
+            <button
+              onClick={SignInWithGoogle}
+              className="btn bg-white text-black border-[#e5e5e5]"
+            >
               <svg
                 aria-label="Google logo"
                 width="16"
@@ -148,7 +150,7 @@ const Login = () => {
             <Link to="/register" className="text-center">
               If don't have an account pls. Register first{" "}
               <span className="text-xl font-bold text-green-400 underline mr-0.5">
-              Register
+                Register
               </span>
             </Link>
           </div>

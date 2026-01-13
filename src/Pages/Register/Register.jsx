@@ -15,10 +15,16 @@ import useAxios from "../../Hook/useAxios";
 const Register = () => {
   const navigate = useNavigate();
   const axiosInstance = useAxios();
-  const { user, createUser, signInWithGoogle, updateUserProfile, loading } =
-    useAuth();
+  const {
+    user,
+    createUser,
+    signInWithGoogle,
+    updateUserProfile,
+    loading,
+    setLoading,
+  } = useAuth();
   console.log(user);
-  const {displayName,email,photoURL}=user || []
+  const { displayName, email, photoUrl } = user || {};
 
   // if(loading)return <Loading></Loading>
 
@@ -34,11 +40,12 @@ const Register = () => {
 
     try {
       createUser(email, password).then(() => {
-        ImageUpload(imageFile).then(() => {
+        ImageUpload(imageFile).then((data) => {
+          console.log(data);
           const userInfo = {
             displayName: name,
-            email,
-            photoUrl: data?.data?.display_url,
+            email: email.toLowerCase(),
+            photoUrl: data,
           };
 
           axiosInstance.post("/users", userInfo).then((res) => {
@@ -57,6 +64,7 @@ const Register = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        setLoading(false);
         navigate("/");
       });
     } catch (err) {
@@ -68,9 +76,9 @@ const Register = () => {
   const SignInWithGoogle = () => {
     signInWithGoogle().then(() => {
       const userInfo = {
-        name: displayName,
-        email: email,
-        photoURL: photoURL,
+        displayName: displayName,
+        email: email.toLowerCase(),
+        photoUrl: photoUrl,
         provider: "google",
       };
       axiosInstance.post("/users", userInfo).then((res) => {
@@ -85,6 +93,7 @@ const Register = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      setLoading(false);
       navigate("/");
     });
   };
@@ -108,10 +117,6 @@ const Register = () => {
                   placeholder="Name"
                   {...register("name", {
                     required: true,
-                    maxLength: {
-                      value: 10,
-                      message: "Name must be at least 5 characters",
-                    },
                   })}
                 />
                 {errors.name && (
@@ -135,7 +140,13 @@ const Register = () => {
                   type="email"
                   className="input w-full"
                   placeholder="Email"
-                  {...register("email", { required: true })}
+                  {...register("email", {
+                    required: true,
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Please enter a valid email address",
+                    },
+                  })}
                 />
                 {errors.email && (
                   <p className="text-red-500 text-sm">{errors.email.message}</p>
@@ -163,7 +174,6 @@ const Register = () => {
                   </p>
                 )}
 
-                
                 <button className="btn btn-neutral mt-4 p-2">
                   {loading ? <LoadingSpinner></LoadingSpinner> : "SUBMIT"}
                 </button>

@@ -41,7 +41,7 @@ const AddChallenges = () => {
       const challengesInfo = {
         name,
         title,
-        email,
+        email:email.toLowerCase(),
         target,
         duration,
         impactMetric,

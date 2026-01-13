@@ -7,6 +7,10 @@ import AddChallenges from "../Components/AdminComponent/AddChallenges";
 import ForgotPassword from "../Pages/ForgetPassword/ForgotPassword";
 import CardDetails from "../Components/CardSection/CardDetails";
 import ErrorPage from "../Pages/ErrorPage";
+import AllCards from "../Components/CardSection/AllCards";
+import MyActivities from "../Components/MyActivity/MyActivities";
+import PrivateRoute from "./PrivateRoute";
+import MyProfile from "../Pages/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -38,7 +42,16 @@ export const router = createBrowserRouter([
   {
     path:"/cardDetails/:id",
     element:<CardDetails></CardDetails>
-  },{
+  },
+  {
+    path:"/myActivities",
+    element:<MyActivities></MyActivities>
+  },
+  {
+    path:"/myProfile",
+    element:<MyProfile></MyProfile>
+  },
+  {
     path:"*",
     Component:ErrorPage,
   }
