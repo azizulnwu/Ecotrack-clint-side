@@ -6,10 +6,10 @@ import { Outlet } from 'react-router';
 
 const RootLayout = () => {
   return (
-  <div>
+  <div className='bg-slate-100'>
       <Navbar />
-      <div className='pt-24 min-h-[calc(100vh-68px)]'>
-        <Outlet />
+      <div className='pt-24 min-h-[calc(100vh-68px)] '>
+        <Outlet className=''/>
       </div>
       <Footer />
     </div>

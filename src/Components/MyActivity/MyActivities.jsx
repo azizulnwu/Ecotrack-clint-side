@@ -113,7 +113,7 @@ const MyActivities = () => {
                         onClick={() =>
                           startChallengeHandler("Ongoing", data.challengeId)
                         }
-                        className="btn bg-blue-300 "
+                        className="btn bg-blue-300 hover:font-bold"
                       >
                         Started
                       </button>
@@ -124,14 +124,14 @@ const MyActivities = () => {
                         onClick={() =>
                           finishedChallengeHandler("Finished", data.challengeId)
                         }
-                        className="btn bg-blue-300  my-1 "
+                        className="btn bg-blue-300  my-1 hover:font-bold"
                       >
                         Finished
                       </button>
                     )}
                     <button
                       onClick={() => deleteChallengeHandler(data.challengeId)}
-                      className="btn  bg-red-600 font-bold"
+                      className="btn  bg-red-500 font-bold hover:bg-red-600"
                     >
                       Delete
                     </button>

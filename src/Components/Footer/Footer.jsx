@@ -3,8 +3,8 @@ import Logo from '../../assets/Logo';
 
 const Footer = () => {
   return (
-    <div className='mt-4'>
-      <footer className="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+    <div className='mt-4 '>
+      <footer className="footer footer-horizontal footer-center  text-base-content rounded p-10 bg-slate-200">
   <nav className="grid grid-flow-col gap-4">
     <a className="link link-hover">About us</a>
     <a className="link link-hover">Contact</a>
@@ -50,7 +50,7 @@ const Footer = () => {
     </div>
   </nav>
   <aside className='flex'>
-    <p className='mr-2'>Copyright © 2025 - All Right Received </p>
+    <p className='mr-2'>© 2025 EcoTarck</p>
     <img src="https://i.ibb.co/gbYs5Gjh/eco-friendly.png" alt="logo" className='w-6 h-6'/>
     <p className='text-green-400'> EcoTrack</p>
   </aside>

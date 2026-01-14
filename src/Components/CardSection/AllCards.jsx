@@ -21,7 +21,12 @@ const AllCards = () => {
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   return (
-    <div className="max-w-[90%] mx-auto grid grid-cols-3 gap-2 bg-slate-300 p-2 rounded-box">
+    <div className="max-w-[90%] mx-auto">
+       <h1 className="text-center font-bold text-2xl bg-sky-200 p-2 rounded-tr-lg rounded-tl-lg">
+      All Card section
+    </h1>
+    <div className="bg-red-300 w-full h-1"></div>
+    <div className=" grid grid-cols-3 gap-2 bg-slate-300 p-4 mb-4 rounded-br-lg rounded-bl-lg">
       {AllCards.map((data) => {
         return (
           <NavLink
@@ -50,6 +55,7 @@ const AllCards = () => {
           </NavLink>
         );
       })}
+    </div>
     </div>
   );
 };

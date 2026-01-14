@@ -22,8 +22,8 @@ const Navbar = () => {
   }, [user?.email, axiosInstance]);
 
   return (
-    <div className="max-w-[80%] mx-auto">
-      <div className="navbar bg-base-100 ">
+    <div className="max-w-[85%] mx-auto p-6">
+      <div className="navbar bg-slate-200 p-3 rounded-box">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -80,10 +80,13 @@ const Navbar = () => {
               <Link to="/myActivities">My Activities</Link>
             </li>
             <li>
-              <Link>Challenges</Link>
+              <Link to="/addUpcomingEvent">Add UpcomingEvent</Link>
             </li>
             <li>
               <Link to="/addChallenges">Add Challenges</Link>
+            </li>
+            <li>
+              <Link to="/tipsAdd">Add tips</Link>
             </li>
           </ul>
         </div>
@@ -119,10 +122,10 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="btn btn-primary mr-2">
+              <Link to="/login" className="btn btn-primary mr-2 font-bold hover:bg-blue-600">
                 Login
               </Link>
-              <Link to="/register" className="btn btn-primary">
+              <Link to="/register" className="btn btn-primary font-bold hover:bg-blue-600 ">
                 Register
               </Link>
             </>

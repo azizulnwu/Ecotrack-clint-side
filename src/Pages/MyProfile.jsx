@@ -67,10 +67,10 @@ const MyProfile = () => {
             {currentUserProfile?.createAt}
           </p>
           <div className="card-actions justify-end">
-            <Link to="/myActivities" className="btn btn-primary mt-2">
+            <Link to="/myActivities" className="btn btn-primary mt-2 hover:bg-blue-600 ">
               My Activity
             </Link>
-            <button onClick={LogoutUser} className="btn btn-primary mt-2">
+            <button onClick={LogoutUser} className="btn btn-primary mt-2 hover:bg-blue-600 ">
               Log Out
             </button>
           </div>

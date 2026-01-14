@@ -133,7 +133,7 @@ const CardDetails = () => {
             <div className="card-actions justify-end">
               <button
                 onClick={userChallengeHandler}
-                className="btn btn-primary"
+                className="btn btn-primary hover:bg-blue-600 "
               >
                 Join Challenge
               </button>
