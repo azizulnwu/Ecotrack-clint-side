@@ -7,10 +7,12 @@ import { toast } from "react-toastify";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import BrandLogo from "../Shared/BrandLogo";
 import ImageUpload from "../../Utility/ImageUpload";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const AddChallenges = () => {
   // const navigate = useNavigate();
   const axiosInstance = useAxios();
+  const axiosSecure =useAxiosSecure()
 
   // if(loading)return <Loading></Loading>
 
@@ -51,7 +53,7 @@ const AddChallenges = () => {
         description
       };
 
-      axiosInstance.post("/challenges", challengesInfo).then((res) => {
+      axiosSecure.post("/challenges", challengesInfo).then((res) => {
         if (res.data.insertedId) {
           console.log({ message: "Challenges Upload Successful" });
         }
@@ -85,13 +87,16 @@ const AddChallenges = () => {
   };
 
   return (
-    <div className="max-w-[80%] mx-auto">
+    <div className="md:max-w-[80%] mx-auto">
       <Link to="/">
         <BrandLogo></BrandLogo>
       </Link>
 
       <div className="hero bg-base-200 min-h-screen p-4 mt-2">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
+           <h1 className="text-center font-bold text-2xl bg-sky-100 p-3 rounded-tr-lg rounded-tl-lg">
+           Please Add Challenge
+          </h1>
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="fieldset">

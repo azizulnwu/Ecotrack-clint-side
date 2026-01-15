@@ -4,13 +4,14 @@ import LoadingSpinner from "../Components/Shared/LoadingSpinner";
 import useAuth from "../Hook/useAuth";
 
 
-const PrivateRoute = ({ Children }) => {
+const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  // const location = useLocation();
+  const location = useLocation();
 
   if (loading) return <LoadingSpinner />;
-  if (user) return Children;
-  return <Navigate to="/login" />;
+  if (!user) 
+  return (<Navigate to="/login" state={location.pathname} replace="true"/>)
+  return children;
 };
 
 export default PrivateRoute;

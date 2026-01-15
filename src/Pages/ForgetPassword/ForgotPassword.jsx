@@ -42,6 +42,9 @@ const ForgotPassword = () => {
 
       <div className="hero bg-base-200 min-h-screen">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
+           <h1 className="text-center font-bold text-2xl bg-sky-100 p-3 rounded-tr-lg rounded-tl-lg">
+           Find Forgot Password 
+          </h1>
           <div className="card-body">
             <form onSubmit={handleSubmit(handleForgotPassword)}>
               <fieldset className="fieldset">

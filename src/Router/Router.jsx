@@ -43,19 +43,19 @@ export const router = createBrowserRouter([
   },
   {
     path:"/cardDetails/:id",
-    element:<CardDetails></CardDetails>
+    element:<PrivateRoute><CardDetails></CardDetails></PrivateRoute>
   },
   {
     path:"/myActivities",
-    element:<MyActivities></MyActivities>
+    element:<PrivateRoute><MyActivities></MyActivities></PrivateRoute>
   },
   {
     path:"/myProfile",
-    element:<MyProfile></MyProfile>
+    element:<PrivateRoute><MyProfile></MyProfile></PrivateRoute>
   },
   {
     path:"/tipsAdd",
-    element:<TipsAdd></TipsAdd>
+    element:<PrivateRoute><TipsAdd></TipsAdd></PrivateRoute>
   },
   {
     path:"/addUpcomingEvent",

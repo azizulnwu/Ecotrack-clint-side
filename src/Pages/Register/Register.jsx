@@ -65,7 +65,7 @@ const Register = () => {
           timer: 1500,
         });
         setLoading(false);
-        navigate("/");
+        navigate("/login");
       });
     } catch (err) {
       console.log(err);
@@ -73,19 +73,25 @@ const Register = () => {
     }
   };
 
-  const SignInWithGoogle = () => {
-    signInWithGoogle().then(() => {
+  const SignInWithGoogle = async () => {
+    try {
+      setLoading(true);
+
+      const result = await signInWithGoogle();
+      const user = result.user;
+
       const userInfo = {
-        displayName: displayName,
-        email: email.toLowerCase(),
-        photoUrl: photoUrl,
+        displayName: user.displayName,
+        email: user.email.toLowerCase(),
+        photoUrl: user.photoURL,
         provider: "google",
       };
-      axiosInstance.post("/users", userInfo).then((res) => {
-        if (res.data.insertedId) {
-          console.log({ message: "user is created" });
-        }
-      });
+
+      const res = await axiosInstance.post("/users", userInfo);
+      if (res.data.insertedId) {
+        console.log({ message: "user is created" });
+      }
+
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -93,10 +99,38 @@ const Register = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      setLoading(false);
+
       navigate("/");
-    });
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   };
+
+  // const SignInWithGoogle =async () => {
+  //   await signInWithGoogle().then( () => {
+  //     const userInfo = {
+  //       displayName: displayName,
+  //       email: email.toLowerCase(),
+  //       photoUrl: photoUrl,
+  //       provider: "google",
+  //     };
+  //     axiosInstance.post("/users", userInfo).then((res) => {
+  //       if (res.data.insertedId) {
+  //         console.log({ message: "user is created" });
+  //       }
+  //     });
+  //     Swal.fire({
+  //       position: "top-end",
+  //       icon: "success",
+  //       title: "Registration Successful",
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     });
+  //     setLoading(false);
+  //     navigate("/");
+  //   });
+  // };
 
   return (
     <div className="max-w-[80%] mx-auto">
@@ -106,6 +140,10 @@ const Register = () => {
 
       <div className="hero bg-base-200 min-h-screen mt-2">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
+          <h1 className="text-center font-bold text-2xl bg-sky-100 p-3 rounded-tr-lg rounded-tl-lg">
+            Register Page
+          </h1>
+          
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="fieldset">

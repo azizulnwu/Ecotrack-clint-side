@@ -15,12 +15,12 @@ const Tips = () => {
 
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
-   <div className="max-w-[90%] mx-auto rounded-box mb-4">
-    <h1 className="text-center font-bold text-2xl bg-sky-200 p-2 rounded-tr-lg rounded-tl-lg">
-      All Tips section
+   <div className="w-full md:max-w-[90%] mx-auto rounded-box mb-4">
+    <h1 className="text-center font-bold text-2xl bg-sky-200 p-4 rounded-tr-lg rounded-tl-lg">
+      All Tips Section
     </h1>
     <div className="bg-red-300 w-full h-1"></div>
-    <div className="grid grid-cols-3 gap-2 bg-slate-300 p-4 rounded-br-lg rounded-bl-lg">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 bg-slate-300 p-0.5 md:p-4 rounded-br-lg rounded-bl-lg">
       
       {AllTips.map((data) => {
         return (

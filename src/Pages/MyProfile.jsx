@@ -4,10 +4,12 @@ import BrandLogo from "../Components/Shared/BrandLogo";
 import useAuth from "../Hook/useAuth";
 import useAxios from "../Hook/useAxios";
 import { toast, ToastContainer } from "react-toastify";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const MyProfile = () => {
   const { user, logOut, setLoading } = useAuth();
   const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure()
   const navigate = useNavigate();
   const [currentUserProfile, setCurrentUserProfile] = useState();
 
@@ -18,21 +20,21 @@ const MyProfile = () => {
       navigate("/");
     });
   };
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     if (!user?.email) return;
 
-    axiosInstance.get(`/user?email=${user?.email}`).then((res) => {
+    axiosSecure.get(`/user?email=${user?.email}`).then((res) => {
       setCurrentUserProfile(res.data);
     });
-  }, [user?.email, axiosInstance]);
+  }, [user?.email, axiosSecure]);
   console.log(currentUserProfile);
   return (
-    <div className="max-w-[70%] mx-auto p-10 ">
+    <div className="w-full md:max-w-[70%] mx-auto p-10 ">
       <Link to="/">
         <BrandLogo></BrandLogo>
       </Link>
-      <div className="card card-side shadow-sm mt-8 p-4 bg-base-300 flex items-end">
+      <div className="card card-side shadow-sm mt-8 md:p-4 bg-base-300 flex flex-col md:flex-row md:items-end">
         <figure>
           <img
             src={
@@ -41,7 +43,7 @@ const MyProfile = () => {
                 : `https://i.ibb.co.com/GQqk9w6N/e035717e-a755-485a-86c7-c165a4f7bb80.jpg`
             }
             alt="logo"
-            className="w-100 h-100 p-3"
+            className="md:w-100 md:h-100 p-3"
           />
         </figure>
         <div className="space-y-3 ml-10">

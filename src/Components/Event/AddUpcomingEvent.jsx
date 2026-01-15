@@ -6,11 +6,12 @@ import Swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router";
 import BrandLogo from "../Shared/BrandLogo";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const AddUpcomingEvent = () => {
   const axiosInstance = useAxios();
   const { user } = useAuth();
-
+  const axiosSecure =useAxiosSecure()
   // if(loading)return <Loading></Loading>
 
   const {
@@ -42,7 +43,7 @@ const AddUpcomingEvent = () => {
         date: new Date(),
       };
 
-      axiosInstance.post("/events", eventsInfo).then((res) => {
+      axiosSecure.post("/events", eventsInfo).then((res) => {
         if (res.data.insertedId) {
           console.log({ message: "Events Upload Successful" });
         }
@@ -62,13 +63,16 @@ const AddUpcomingEvent = () => {
     reset();
   };
   return (
-    <div className="max-w-[80%] mx-auto">
+    <div className="md:max-w-[80%] mx-auto">
       <Link to="/">
         <BrandLogo></BrandLogo>
       </Link>
 
       <div className="hero bg-base-200 min-h-screen p-4 mt-2">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
+          <h1 className="text-center font-bold text-2xl bg-sky-100 p-3 rounded-tr-lg rounded-tl-lg">
+           Please Add Upcoming Event
+          </h1>
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="fieldset">

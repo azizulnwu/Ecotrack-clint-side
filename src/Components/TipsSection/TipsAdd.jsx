@@ -6,9 +6,11 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { Link } from "react-router";
 import BrandLogo from "../Shared/BrandLogo";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 const TipsAdd = () => {
   const axiosInstance = useAxios();
   const { user } = useAuth();
+  const axiosSecure =useAxiosSecure()
 
   // if(loading)return <Loading></Loading>
 
@@ -33,7 +35,7 @@ const TipsAdd = () => {
         createdAt: new Date(),
       };
 
-      axiosInstance.post("/tips", tipsInfo).then((res) => {
+      axiosSecure.post("/tips", tipsInfo).then((res) => {
         if (res.data.insertedId) {
           console.log({ message: "Tips Upload Successful" });
         }
@@ -54,13 +56,16 @@ const TipsAdd = () => {
   };
 
   return (
-    <div className="max-w-[80%] mx-auto">
+    <div className="md:max-w-[80%] mx-auto">
       <Link to="/">
         <BrandLogo></BrandLogo>
       </Link>
 
       <div className="hero bg-base-200 min-h-screen p-4 mt-2">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
+           <h1 className="text-center font-bold text-2xl bg-sky-100 p-3 rounded-tr-lg rounded-tl-lg">
+           Please Add Tips
+          </h1>
           <div className="card-body">
             <form onSubmit={handleSubmit(onSubmit)}>
               <fieldset className="fieldset">

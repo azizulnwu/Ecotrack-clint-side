@@ -6,10 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import useAxios from "../../Hook/useAxios";
 import { toast, ToastContainer } from "react-toastify";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const MyActivities = () => {
   const { user } = useAuth() || [];
   const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure()
   const { email } = user || [];
 
   const {
@@ -19,7 +21,7 @@ const MyActivities = () => {
   } = useQuery({
     queryKey: ["MyActivities", user],
     queryFn: async () => {
-      const res = await axiosInstance.get(
+      const res = await axiosSecure.get(
         `/userChallenges/find?email=${email}`
       );
       console.log(res.data);
@@ -36,7 +38,7 @@ const MyActivities = () => {
       userEmail: email,
       challengeId: id,
     };
-    await axiosInstance
+    await axiosSecure
       .patch("/userChallenges/statusUpdated", updateData)
       .then(() => {
         toast("Challenge Start going on");
@@ -57,7 +59,7 @@ const MyActivities = () => {
       challengeId: id,
     };
     console.log(deleteChallengerData)
-    await axiosInstance
+    await axiosSecure
       .post("/userChallenges/delete",deleteChallengerData)
       .then(() => {
         toast("Challenge Deleted");
@@ -66,12 +68,12 @@ const MyActivities = () => {
   };
 
   return (
-    <div className="max-w-[90%] mx-auto p-10 mt-8 bg-slate-50">
+    <div className=" md:max-w-[90%] mx-auto p-10 mt-8 bg-slate-50">
       <Link to="/">
         <BrandLogo></BrandLogo>
       </Link>
-      <div className="overflow-x-auto mt-10">
-        <table className="table">
+      <div className="sm:overflow-y-auto md:overflow-x-auto mt-10">
+        <table className="table sm:flex sm:flex-col">
           {/* head */}
           <thead>
             <tr className=" bg-slate-200">

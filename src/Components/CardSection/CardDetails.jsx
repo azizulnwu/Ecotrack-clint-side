@@ -7,6 +7,7 @@ import LoadingSpinner from "../Shared/LoadingSpinner";
 import useAuth from "../../Hook/useAuth";
 import Swal from "sweetalert2";
 import { toast, ToastContainer } from "react-toastify";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const CardDetails = () => {
   const { user } = useAuth();
@@ -14,6 +15,7 @@ const CardDetails = () => {
   const navigate = useNavigate();
   console.log(id);
   const axiosInstance = useAxios();
+  const axiosSecure = useAxiosSecure()
   const {
     data: cardDetails = {},
     error,
@@ -22,7 +24,7 @@ const CardDetails = () => {
   } = useQuery({
     queryKey: ["cardDetails", id],
     queryFn: async () => {
-      const result = await axiosInstance.get(`/challengeData/${id}`);
+      const result = await axiosSecure.get(`/challengeData/${id}`);
       console.log(result.data);
       return result.data;
     },
@@ -65,7 +67,7 @@ const CardDetails = () => {
       status: "Not Started",
     };
 
-    axiosInstance.post("/userChallenges", userChallengesInfo).then((res) => {
+    axiosSecure.post("/userChallenges", userChallengesInfo).then((res) => {
       if (res.data.insertedId) {
         console.log({ message: "Challenge is accept" });
       }
@@ -90,7 +92,7 @@ const CardDetails = () => {
       </Link>
       <div className="bg-slate-300">
         <div
-          className="card card-side flex justify-center  shadow-sm mt-20 p-8
+          className="card card-side flex flex-col md:flex-row justify-center  shadow-sm mt-20 p-8
      "
         >
           <figure className="object-fill">

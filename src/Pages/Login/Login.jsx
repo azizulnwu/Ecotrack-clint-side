@@ -1,6 +1,6 @@
 import React from "react";
 import BrandLogo from "../../Components/Shared/BrandLogo";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../Hook/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -9,6 +9,8 @@ import LoadingSpinner from "../../Components/Shared/LoadingSpinner";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation()
+  console.log(location)
   const { signIn, signInWithGoogle, loading, setLoading } = useAuth();
 
   // if(loading)return <Loading></Loading>
@@ -31,7 +33,7 @@ const Login = () => {
           timer: 1500,
         });
          setLoading(false)
-        navigate("/");
+         navigate(location.state || "/");
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +51,7 @@ const Login = () => {
         timer: 1500,
       });
        setLoading(false)
-      navigate("/");
+      navigate(location.state || "/");
     });
   };
 
@@ -61,6 +63,9 @@ const Login = () => {
 
       <div className="hero bg-base-200 min-h-screen mt-2">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
+          <h1 className="text-center font-bold text-2xl bg-sky-100 p-3 rounded-tr-lg rounded-tl-lg">
+         Please Login
+          </h1>
           <div className="card-body">
             <form onSubmit={handleSubmit(onLogin)}>
               <fieldset className="fieldset">

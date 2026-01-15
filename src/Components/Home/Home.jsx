@@ -7,7 +7,7 @@ import UpcomingEvents from "../Event/UpcomingEvents";
 
 const Home = () => {
   return (
-    <div className="max-w-[90%] mx-auto ">
+    <div className="w-full md:max-w-[90%] md:mx-auto ">
       <HeroSection></HeroSection>
       <Statistics></Statistics>
       <AllCards></AllCards>

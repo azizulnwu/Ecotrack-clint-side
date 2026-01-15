@@ -35,7 +35,7 @@ const HeroSection = () => {
     console.log("Thumbnail clicked:", index);
   };
   return (
-   <div className="max-w-[90%] mx-auto bg-pink-50
+   <div className="w-full md:max-w-[90%] mx-auto bg-pink-50
     border-2 border-lime-300 mb-4 pt-8 -mt-16 rounded-sm">
      <div className="max-w-[70%] mx-auto mb-8 ">
       <Carousel

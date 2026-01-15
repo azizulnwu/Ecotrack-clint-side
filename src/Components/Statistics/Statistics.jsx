@@ -23,7 +23,7 @@ const Statistics = () => {
 
   
   return (
-    <div className='max-w-[90%] mx-auto bg-red-300 pt-6 pb-3 px-4 mb-4 p-6 '>
+    <div className='max-w-[90%] mx-auto bg-red-200 pt-8 pb-3 px-4 mb-4 p-6 '>
       <div className=''>
       <div className='my-20'>
         {/* small cards */}

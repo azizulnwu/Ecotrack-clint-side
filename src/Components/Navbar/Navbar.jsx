@@ -20,7 +20,7 @@ const Navbar = () => {
       setCurrentUser(res.data);
     });
   }, [user?.email, axiosInstance]);
-
+  console.log(currentUser);
   return (
     <div className="max-w-[85%] mx-auto p-6">
       <div className="navbar bg-slate-200 p-3 rounded-box">
@@ -52,14 +52,23 @@ const Navbar = () => {
               </li>
 
               <li>
-                <Link>My Activities</Link>
+                <Link to="/myActivities">My Activities</Link>
               </li>
               <li>
-                <Link>Challenges</Link>
+                 <Link to="/tipsAdd">Add tips</Link>
               </li>
-              <li>
-                <Link to="/addChallenges">Add Challenges</Link>
-              </li>
+              {user && currentUser?.roll == "admin" && (
+                <li>
+                  <Link to="/addUpcomingEvent">Add UpcomingEvent</Link>
+                </li>
+              )}
+
+              {user && currentUser?.roll == "admin" && (
+                <li>
+                  {" "}
+                  <Link to="/addChallenges">Add Challenges</Link>{" "}
+                </li>
+              )}
             </ul>
           </div>
           <div className="flex items-center ml-2">
@@ -79,12 +88,20 @@ const Navbar = () => {
             <li>
               <Link to="/myActivities">My Activities</Link>
             </li>
-            <li>
-              <Link to="/addUpcomingEvent">Add UpcomingEvent</Link>
-            </li>
-            <li>
-              <Link to="/addChallenges">Add Challenges</Link>
-            </li>
+
+            {user && currentUser?.roll == "admin" && (
+              <li>
+                <Link to="/addUpcomingEvent">Add UpcomingEvent</Link>
+              </li>
+            )}
+
+            {user && currentUser?.roll == "admin" && (
+              <li>
+                {" "}
+                <Link to="/addChallenges">Add Challenges</Link>{" "}
+              </li>
+            )}
+
             <li>
               <Link to="/tipsAdd">Add tips</Link>
             </li>
@@ -122,10 +139,16 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="btn btn-primary mr-2 font-bold hover:bg-blue-600">
+              <Link
+                to="/login"
+                className="btn btn-primary mr-2 font-bold hover:bg-blue-600"
+              >
                 Login
               </Link>
-              <Link to="/register" className="btn btn-primary font-bold hover:bg-blue-600 ">
+              <Link
+                to="/register"
+                className="btn btn-primary font-bold hover:bg-blue-600 "
+              >
                 Register
               </Link>
             </>

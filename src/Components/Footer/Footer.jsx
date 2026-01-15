@@ -50,9 +50,10 @@ const Footer = () => {
     </div>
   </nav>
   <aside className='flex'>
-    <p className='mr-2'>© 2025 EcoTarck</p>
+    
     <img src="https://i.ibb.co/gbYs5Gjh/eco-friendly.png" alt="logo" className='w-6 h-6'/>
     <p className='text-green-400'> EcoTrack</p>
+    <p className='mr-2'>© 2026 EcoTarck</p>
   </aside>
 </footer>
       
