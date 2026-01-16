@@ -12,7 +12,7 @@ const UpcomingEvents = () => {
     queryKey: ["AllEvents"],
     queryFn: async () => {
       const result = await axiosSecure.get("/events/all");
-      console.log(result.data);
+      // console.log(result.data);
       return result.data;
     },
   });

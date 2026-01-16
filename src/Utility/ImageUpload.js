@@ -10,8 +10,8 @@ const ImageUpload = async (imageFile) => {
       import.meta.env.VITE_IMAGEBB_API_KEY
     }`,formData 
   );
- console.log(data?.data?.
-display_url)
+//  console.log(data?.data?.
+// display_url)
 return data?.data?.
 display_url;
 };

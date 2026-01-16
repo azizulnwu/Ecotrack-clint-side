@@ -10,7 +10,7 @@ import LoadingSpinner from "../../Components/Shared/LoadingSpinner";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const { signIn, signInWithGoogle, loading, setLoading } = useAuth();
 
   // if(loading)return <Loading></Loading>
@@ -36,7 +36,7 @@ const Login = () => {
         navigate(location.state || "/");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         toast.error(err?.message);
       });
   };

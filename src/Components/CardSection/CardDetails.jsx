@@ -13,7 +13,7 @@ const CardDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log(id);
+  // console.log(id);
   const axiosInstance = useAxios();
   const axiosSecure = useAxiosSecure()
   const {
@@ -25,7 +25,7 @@ const CardDetails = () => {
     queryKey: ["cardDetails", id],
     queryFn: async () => {
       const result = await axiosSecure.get(`/challengeData/${id}`);
-      console.log(result.data);
+      // console.log(result.data);
       return result.data;
     },
   });

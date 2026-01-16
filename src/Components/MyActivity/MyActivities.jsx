@@ -24,7 +24,7 @@ const MyActivities = () => {
       const res = await axiosSecure.get(
         `/userChallenges/find?email=${email}`
       );
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     },
   });
@@ -32,7 +32,7 @@ const MyActivities = () => {
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
   const ChallengeHandler = async (data, id) => {
-    console.log(data);
+    // console.log(data);
     const updateData = {
       status: data,
       userEmail: email,
@@ -58,7 +58,7 @@ const MyActivities = () => {
       userEmail: email,
       challengeId: id,
     };
-    console.log(deleteChallengerData)
+    // console.log(deleteChallengerData)
     await axiosSecure
       .post("/userChallenges/delete",deleteChallengerData)
       .then(() => {

@@ -23,7 +23,7 @@ const Register = () => {
     loading,
     setLoading,
   } = useAuth();
-  console.log(user);
+  // console.log(user);
   const { displayName, email, photoUrl } = user || {};
 
   // if(loading)return <Loading></Loading>
@@ -41,7 +41,7 @@ const Register = () => {
     try {
       createUser(email, password).then(() => {
         ImageUpload(imageFile).then((data) => {
-          console.log(data);
+          // console.log(data);
           const userInfo = {
             displayName: name,
             email: email.toLowerCase(),
@@ -68,7 +68,7 @@ const Register = () => {
         navigate("/login");
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       toast.error(err?.message);
     }
   };
@@ -102,7 +102,7 @@ const Register = () => {
 
       navigate("/");
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       setLoading(false);
     }
   };

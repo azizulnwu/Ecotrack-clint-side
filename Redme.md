@@ -1,5 +1,6 @@
 Website Name:EcoTrack
-Clint Side live Url:
+Clint Side live Url:https://eco-track-77104.web.app
+Server Side live Url:https://ecotrack-server-side-brown.vercel.app
 
 Admin :
 1.email: azizulnwu@gmail.com

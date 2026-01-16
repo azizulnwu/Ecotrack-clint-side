@@ -28,7 +28,7 @@ const MyProfile = () => {
       setCurrentUserProfile(res.data);
     });
   }, [user?.email, axiosSecure]);
-  console.log(currentUserProfile);
+  // console.log(currentUserProfile);
   return (
     <div className="w-full md:max-w-[70%] mx-auto p-10 ">
       <Link to="/">

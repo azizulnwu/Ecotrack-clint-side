@@ -20,7 +20,7 @@ const Navbar = () => {
       setCurrentUser(res.data);
     });
   }, [user?.email, axiosInstance]);
-  console.log(currentUser);
+  // console.log(currentUser);
   return (
     <div className="max-w-[85%] mx-auto p-6">
       <div className="navbar bg-slate-200 p-3 rounded-box">

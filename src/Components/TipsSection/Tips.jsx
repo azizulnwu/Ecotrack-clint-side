@@ -8,7 +8,7 @@ const Tips = () => {
     queryKey: ["AllTips"],
     queryFn: async () => {
       const result = await axiosInstance.get("/tips/all");
-      console.log(result.data);
+      // console.log(result.data);
       return result.data;
     },
   });

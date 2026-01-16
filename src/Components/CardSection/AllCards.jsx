@@ -13,7 +13,7 @@ const AllCards = () => {
     queryKey: ["AllCards"],
     queryFn: async () => {
       const result = await axiosInstance.get("/challengeData");
-      console.log(result.data)
+      // console.log(result.data)
       return result.data;
     },
   });
