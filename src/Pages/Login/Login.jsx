@@ -9,8 +9,8 @@ import LoadingSpinner from "../../Components/Shared/LoadingSpinner";
 
 const Login = () => {
   const navigate = useNavigate();
-  const location = useLocation()
-  console.log(location)
+  const location = useLocation();
+  console.log(location);
   const { signIn, signInWithGoogle, loading, setLoading } = useAuth();
 
   // if(loading)return <Loading></Loading>
@@ -32,8 +32,8 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-         setLoading(false)
-         navigate(location.state || "/");
+        setLoading(false);
+        navigate(location.state || "/");
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +50,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-       setLoading(false)
+      setLoading(false);
       navigate(location.state || "/");
     });
   };
@@ -64,7 +64,7 @@ const Login = () => {
       <div className="hero bg-base-200 min-h-screen mt-2">
         <div className="card bg-base-100  w-[50%] shrink-0 shadow-2xl">
           <h1 className="text-center font-bold text-2xl bg-sky-100 p-3 rounded-tr-lg rounded-tl-lg">
-         Please Login
+            Please Login
           </h1>
           <div className="card-body">
             <form onSubmit={handleSubmit(onLogin)}>
